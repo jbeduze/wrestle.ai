@@ -6,7 +6,7 @@ st.set_page_config(
   page_title="Team Roster and Cross Analysis",
   page_icon=":snake:",
   layout="wide",
-  initial_sidebar_state="expanaded",
+  initial_sidebar_state="expanded",
 )
 
 #load local data file
