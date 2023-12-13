@@ -9,4 +9,4 @@ st.write('Welcome to your sports dashboard')
   #if uploaded_file is not None:
 df = pd.read_csv("wrestling_fake_data_Sheet1.csv") #(uploaded_file)
 df.head()
-pyg.walk(df, dark='light')
+pyg.walk(df)
