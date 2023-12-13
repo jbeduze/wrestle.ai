@@ -10,7 +10,7 @@ st/set_page_config(
 )
 #load local data file
 @st.cache_data
-dataframe = pd.read_csv("wrestling_fake_data_Sheet1.csv")
+  df = pd.read_csv("wrestling_fake_data_Sheet1.csv")
   
 #set up Pygwalker
 def load_config(file_path):
@@ -18,4 +18,4 @@ def load_config(file_path):
     config_str = config_file.read()
   return config_str
 config = load_config('config.json')
-pyg.walk(dataframe, env='streamlit', dark='dark', spec=config)
+pyg.walk(df, env='streamlit', dark='dark', spec=config)
