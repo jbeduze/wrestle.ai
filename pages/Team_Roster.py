@@ -2,12 +2,12 @@ import streamlit as st
 import pandas as pd
 import pygwalker as pyg
 
-# st.set_page_config(
-#   page_title="Team Roster and Cross Analysis",
-#   page_icon=":snake:",
-#   layout="wide",
-#   initial_sidebar_state="expanded",
-# )
+st.set_page_config(
+  page_title="Team Roster and Cross Analysis",
+  page_icon=":snake:",
+  layout="wide",
+  initial_sidebar_state="expanded",
+)
 
 #load local data file
 @st.cache
