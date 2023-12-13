@@ -10,7 +10,7 @@ st/set_page_config(
 )
 #load local data file
 @st.cache_data
-  df = pd.read_csv("wrestling_fake_data_Sheet1.csv")
+df = pd.read_csv("wrestling_fake_data_Sheet1.csv")
   
 #set up Pygwalker
 def load_config(file_path):
