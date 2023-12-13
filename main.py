@@ -1,1 +1,1 @@
-st.write('Home page')
+st.write('Welcome to your sports dashboard')
