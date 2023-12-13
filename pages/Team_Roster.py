@@ -8,6 +8,7 @@ st.set_page_config(
   page_icon=":snake:",
   layout="wide",
   initial_sidebar_state="expanded",
+  dark='dark',
 )
 df = pd.read_csv("wrestling_fake_data_Sheet1.csv")
 pyg_html = pyg.walk(df, return_html=True)
