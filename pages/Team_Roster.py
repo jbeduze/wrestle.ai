@@ -2,15 +2,18 @@ import streamlit as st
 import pandas as pd
 import pygwalker as pyg
 
-st/set_page_config(
-  page_title="Team Roster and cross analysis",
+st.set_page_config(
+  page_title="Team Roster and Cross Analysis",
   page_icon=":snake:",
   layout="wide",
   initial_sidebar_state="expanaded",
 )
+
 #load local data file
-@st.cache_data
-df = pd.read_csv("wrestling_fake_data_Sheet1.csv")
+@st.cache
+def load_data():
+  df = pd.read_csv("wrestling_fake_data_Sheet1.csv")
+  return df
   
 #set up Pygwalker
 def load_config(file_path):
