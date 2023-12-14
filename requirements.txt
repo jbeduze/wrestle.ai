@@ -4,3 +4,6 @@ plotly
 pygwalker
 opencv-python-headless
 opencv-python
+#below are to assist in openCV operations
+protobuf
+tensorflow
