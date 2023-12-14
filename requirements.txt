@@ -2,6 +2,7 @@ streamlit
 pandas
 plotly
 pygwalker
+openai
 opencv-python-headless
 
 #below are to assist in openCV operations
