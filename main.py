@@ -32,7 +32,7 @@ for video_file in video_files:
     total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
 
     # Define the slider with the total number of frames as the max value
-    frame_number = st.slider('the number of frames listed below are the total number of frames in the video. Scroll for closer inspection.', 0, total_frames - 1, key=video_file.name)
+    frame_number = st.slider('the number of frames listed below are the total number of frames in the video you provided. Scroll for closer inspection.', 0, total_frames - 1, key=video_file.name)
 
     # Set the video to the selected frame
     video.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
