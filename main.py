@@ -11,7 +11,7 @@ from openai import OpenAI
 import os
 import requests
 
-client = OpenAI()
+#client = OpenAI()
 
 st.write('Welcome to your sports dashboard')
 #uploaded_file = st.file_uploader("choose a file or drag and drop")
