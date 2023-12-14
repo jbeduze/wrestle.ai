@@ -4,7 +4,7 @@ import pandas as pd
 import pygwalker as pyg
 
 from IPython.display import display, Image, Audio
-import cv2  # We're using OpenCV to read video, to install !pip install opencv-python
+import cv2
 import base64
 import time
 from openai import OpenAI
