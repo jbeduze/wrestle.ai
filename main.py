@@ -28,7 +28,7 @@ st.write("Read video uploaded, establish keyframes, provide description of what'
 #client = OpenAI()
       #extract the Frames from uploaded video
       # Load the video
-video = cv2.VideoCapture(video_files)
+video = cv2.VideoCapture(video_bytes)
 
 # Get the total number of frames
 total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
