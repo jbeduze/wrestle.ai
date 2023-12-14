@@ -10,8 +10,7 @@ st.write('Welcome to your sports dashboard')
 df = pd.read_csv("wrestling_fake_data_Sheet1.csv") #(uploaded_file)
 
 
-video_file = st.video('Upload Video Here',
-                     type=['.mp4', '.avi', '.mov', '.mkv'])
+video_file = st.video()
 video_bytes = video_file.read()
 
 st.video(video_bytes)
