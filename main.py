@@ -30,16 +30,16 @@ st.write("Read video uploaded, establish keyframes, produce dynamic slider to be
 # for uploaded_file in uploaded_files:
 #     bytes_data = uploaded_file.read()
 #     st.write(bytes_data)
+"---"
+# video = cv2.VideoCapture(video_files)
 
-video = cv2.VideoCapture(video_files)
+# base64Frames = []
+# while video.isOpened():
+#     success, frame = video.read()
+#     if not success:
+#         break
+#     _, buffer = cv2.imencode(".jpg", frame)
+#     base64Frames.append(base64.b64encode(buffer).decode("utf-8"))
 
-base64Frames = []
-while video.isOpened():
-    success, frame = video.read()
-    if not success:
-        break
-    _, buffer = cv2.imencode(".jpg", frame)
-    base64Frames.append(base64.b64encode(buffer).decode("utf-8"))
-
-video.release()
-print(len(base64Frames), "frames read.")
+# video.release()
+# print(len(base64Frames), "frames read.")
