@@ -29,7 +29,7 @@ for video_file in video_files:
 #     bytes_data = uploaded_file.read()
 #     st.write(bytes_data)
 
-video = cv2.VideoCapture("data/bison.mp4")
+video = cv2.VideoCapture(video_files)
 
 base64Frames = []
 while video.isOpened():
