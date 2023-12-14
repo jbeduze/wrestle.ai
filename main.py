@@ -2,7 +2,16 @@ import streamlit as st
 import plotly
 import pandas as pd
 import pygwalker as pyg
+from IPython.display import display, Image, Audio
 
+import cv2  # We're using OpenCV to read video, to install !pip install opencv-python
+import base64
+import time
+from openai import OpenAI
+import os
+import requests
+
+client = OpenAI()
 
 st.write('Welcome to your sports dashboard')
 #uploaded_file = st.file_uploader("choose a file or drag and drop")
@@ -15,7 +24,8 @@ for video_file in video_files:
   video_bytes = video_file.read()
   st.video(video_bytes)
 "---"
-uploaded_files = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
-for uploaded_file in uploaded_files:
-    bytes_data = uploaded_file.read()
-    st.write(bytes_data)
+# uploaded_files = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
+# for uploaded_file in uploaded_files:
+#     bytes_data = uploaded_file.read()
+#     st.write(bytes_data)
+
