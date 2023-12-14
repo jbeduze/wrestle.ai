@@ -10,7 +10,13 @@ st.write('Welcome to your sports dashboard')
 df = pd.read_csv("wrestling_fake_data_Sheet1.csv") #(uploaded_file)
 
 
-video_file = st.video()
-video_bytes = video_file.read()
+# video_file = st.video()
+# video_bytes = video_file.read()
 
-st.video(video_bytes)
+# st.video(video_bytes)
+
+uploaded_files = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
+for uploaded_file in uploaded_files:
+    bytes_data = uploaded_file.read()
+    st.write("filename:", uploaded_file.name)
+    st.write(bytes_data)
