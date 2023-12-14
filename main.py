@@ -18,7 +18,7 @@ for video_file in video_files:
   video_bytes = video_file.read()
   st.video(video_bytes)
 
-st.write("Read video uploaded, establish keyframes, produce dynamic slider to be able to reference key frames, provide discription of what's happening in video")
+st.write("Read video uploaded, establish keyframes, provide description of what's happening in video")
 "---"
 # uploaded_files = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
 # for uploaded_file in uploaded_files:
