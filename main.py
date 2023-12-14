@@ -23,6 +23,8 @@ video_files = st.file_uploader("Upload a video file", type=['.mp4', '.avi', '.mo
 for video_file in video_files:
   video_bytes = video_file.read()
   st.video(video_bytes)
+
+st.write("Read video uploaded, establish keyframes, produce dynamic slider to be able to reference key frames, provide discription of what's happening in video")
 "---"
 # uploaded_files = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
 # for uploaded_file in uploaded_files:
