@@ -8,3 +8,7 @@ opencv-python-headless
 #below are to assist in openCV operations
 protobuf
 tensorflow
+
+#for activating webcam
+streamlit-webrtc
+nympy
