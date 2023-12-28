@@ -17,6 +17,8 @@ import av
 #client = OpenAI()
 st.write('Welcome to your Athlete Analysis dashboard')
 
+st.write("If you choose to upload files into this software or take live videos, all is possible!")
+
 video_files = st.file_uploader("Upload a video file", type=['.mp4', '.avi', '.mov', '.mkv'], accept_multiple_files=True)
 
 for video_file in video_files:
@@ -53,5 +55,5 @@ class VideoProcessor:
         
         return av.VideoFrame.from_ndarray(frm, format='bgr24')
 
-webrtc_streamer(key='Key', video_processor_factory=VideoProcessor)
+webrtc_streamer(key='key', video_processor_factory=VideoProcessor)
 
