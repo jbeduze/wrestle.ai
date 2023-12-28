@@ -35,8 +35,8 @@ for video_file in video_files:
 
     # Get the total number of frames
     total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
-	fps = video.get(cv2CAP_PROP_FPS)
-	duration = total_frames / fps
+fps = video.get(cv2CAP_PROP_FPS)
+duration = total_frames / fps
 
     # Define the slider with the total number of frames as the max value and the range within that you want to grab
     start_time = st.slider("Start Time (seconds)", 0.0, duration, 0.0, 0.1)
