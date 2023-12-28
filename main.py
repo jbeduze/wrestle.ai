@@ -128,25 +128,88 @@ for video_file in video_files:
 #         return av.VideoFrame.from_ndarray(frm, format='bgr24')
 
 # webrtc_streamer(key='key', video_processor_factory=VideoProcessor)
-from streamlit_webrtc import webrtc_streamer, RTCConfiguration
+# from streamlit_webrtc import webrtc_streamer, RTCConfiguration
+# import av
+# import cv2
+
+# cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+
+# class VideoProcessor:
+# 	def recv(self, frame):
+# 		frm = frame.to_ndarray(format="bgr24")
+
+# 		faces = cascade.detectMultiScale(cv2.cvtColor(frm, cv2.COLOR_BGR2GRAY), 1.1, 3)
+
+# 		for x,y,w,h in faces:
+# 			cv2.rectangle(frm, (x,y), (x+w, y+h), (0,255,0), 3)
+
+# 		return av.VideoFrame.from_ndarray(frm, format='bgr24')
+
+# webrtc_streamer(key="key", video_processor_factory=VideoProcessor,
+# 				rtc_configuration=RTCConfiguration(
+# 					{"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
+# 					)
+# 	)
+from streamlit_webrtc import webrtc_streamer, RTCConfiguration, VideoProcessorBase
 import av
 import cv2
+import streamlit as st
+import threading
+
+class VideoProcessor(VideoProcessorBase):
+    def __init__(self) -> None:
+        self.is_recording = False
+        self.video_frames = []
+        self.recording_lock = threading.Lock()
+
+    def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
+        frm = frame.to_ndarray(format="bgr24")
+        faces = cascade.detectMultiScale(cv2.cvtColor(frm, cv2.COLOR_BGR2GRAY), 1.1, 3)
+
+        for x, y, w, h in faces:
+            cv2.rectangle(frm, (x, y), (x + w, y + h), (0, 255, 0), 3)
+
+        if self.is_recording:
+            with self.recording_lock:
+                self.video_frames.append(frm)
+
+        return av.VideoFrame.from_ndarray(frm, format='bgr24')
+
+    def start_recording(self):
+        with self.recording_lock:
+            self.is_recording = True
+            self.video_frames.clear()
+
+    def stop_recording(self, filename):
+        with self.recording_lock:
+            self.is_recording = False
+            if self.video_frames:
+                self.save_video(filename)
+
+    def save_video(self, filename):
+        if not self.video_frames:
+            return
+        first_frame = self.video_frames[0]
+        height, width, _ = first_frame.shape
+        codec = cv2.VideoWriter_fourcc(*'mp4v')
+        out = cv2.VideoWriter(filename, codec, 20.0, (width, height))
+
+        for frame in self.video_frames:
+            out.write(frame)
+        out.release()
 
 cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
-class VideoProcessor:
-	def recv(self, frame):
-		frm = frame.to_ndarray(format="bgr24")
+ctx = webrtc_streamer(key="key", video_processor_factory=VideoProcessor,
+                      rtc_configuration=RTCConfiguration(
+                          {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
+                      ))
 
-		faces = cascade.detectMultiScale(cv2.cvtColor(frm, cv2.COLOR_BGR2GRAY), 1.1, 3)
+if ctx.video_processor:
+    if st.button("Start Recording"):
+        ctx.video_processor.start_recording()
+        st.write("Recording started.")
 
-		for x,y,w,h in faces:
-			cv2.rectangle(frm, (x,y), (x+w, y+h), (0,255,0), 3)
-
-		return av.VideoFrame.from_ndarray(frm, format='bgr24')
-
-webrtc_streamer(key="key", video_processor_factory=VideoProcessor,
-				rtc_configuration=RTCConfiguration(
-					{"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
-					)
-	)
+    if st.button("Stop Recording"):
+        ctx.video_processor.stop_recording("output.mp4")
+        st.write("Recording stopped. Video saved as output.mp4.")
