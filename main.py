@@ -12,6 +12,7 @@ import os
 import requests
 #activate webcam
 from streamlit_webrtc import webrtc_streamer
+import av
 
 #client = OpenAI()
 st.write('Welcome to your Athlete Analysis dashboard')
