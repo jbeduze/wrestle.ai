@@ -50,7 +50,8 @@ out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.g
 for _ in range(start_frame, end_frame):
         ret, frame = video.read()
         if not ret:
-	out.write(frame)
+		break
+		out.write(frame)
 
 out.release()
 st.video('output.mp4')
