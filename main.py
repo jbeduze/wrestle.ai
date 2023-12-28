@@ -47,14 +47,14 @@ if st.button('Extract Video Segment'):
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.get(4))))
 
-        	for _ in range(start_frame, end_frame):
-           	 ret, frame = video.read()
-            	if not ret:
-               	 break
-	            out.write(frame)
+for _ in range(start_frame, end_frame):
+        ret, frame = video.read()
+        if not ret:
+		break
+	out.write(frame)
 
-        	out.release()
-        	st.video('output.mp4')
+out.release()
+st.video('output.mp4')
     # Set the video to the selected frame
     	video.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
     	success, frame = video.read()
@@ -64,7 +64,7 @@ out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.g
         _, buffer = cv2.imencode('.jpg', frame)
         st.image(buffer.tobytes(), channels="BGR")
 
-    video.release()
+video.release()
 
 # class VideoProcessor:
 #     def recv(self, frame):
