@@ -53,5 +53,5 @@ class VideoProcessor:
         
         return av.VideoFrame.from_ndarray(frm, format='bgr24')
 
-webrtc_streamer(key='Key', video_processor_factory=videoprocessor)
+webrtc_streamer(key='Key', video_processor_factory=VideoProcessor)
 
