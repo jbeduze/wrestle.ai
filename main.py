@@ -29,7 +29,7 @@ urllib.request.urlretrieve(haar_url, haar_file)
 st.write('Welcome to your Athlete Analysis dashboard')
 st.write("If you choose to upload files into this software or take live videos, all is possible!")
 st.subheader('upload a video file')
-video_files = st.file_uploader(type=['.mp4', '.avi', '.mov', '.mkv'], accept_multiple_files=True)
+video_files = st.file_uploader("",type=['.mp4', '.avi', '.mov', '.mkv'], accept_multiple_files=True)
 
 for video_file in video_files:
     # Save the uploaded video file to a temporary file
