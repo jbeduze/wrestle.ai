@@ -45,7 +45,7 @@ if st.button('Extract Video Segment'):
 	start_frame = int(start_time * fps)
 	# end_frame = int(end_time * fps)
 	fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        	out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.get(4))))
+        out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.get(4))))
 
         	for _ in range(start_frame, end_frame):
            	 ret, frame = video.read()
