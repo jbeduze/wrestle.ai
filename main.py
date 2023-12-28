@@ -13,6 +13,7 @@ import requests
 #activate webcam
 from streamlit_webrtc import webrtc_streamer, RTCConfiguration
 import av
+import urllib.request
 
 #client = OpenAI()
 # st.write('Welcome to your Athlete Analysis dashboard')
@@ -68,6 +69,10 @@ import av
 import streamlit as st
 import cv2
 import tempfile
+
+haar_url = "https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml?raw=true"
+haar_file = "haarcascade_frontalface_default.xml"
+urllib.request.urlretrieve(haar_url, haar_file)
 
 # ... [rest of your imports]
 
