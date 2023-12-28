@@ -46,5 +46,11 @@ for video_file in video_files:
 
     video.release()
 
-webrtc_streamer(key='Key')
+class VideoProcessor:
+    def recv(self, frame):
+        frm = frame.to_ndarray(format="bgr24")
+        
+        return av.VideoFrame.from ndarray(frm, format='bgr24')
+
+webrtc_streamer(key='Key', video_processor_factory=videoprocessor)
 
