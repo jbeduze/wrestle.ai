@@ -11,7 +11,7 @@ import time
 import os
 import requests
 #activate webcam
-from streamlit_webrtc import webrtc_streamer
+from streamlit_webrtc import webrtc_streamer, RTCConfiguration
 import av
 
 #client = OpenAI()
