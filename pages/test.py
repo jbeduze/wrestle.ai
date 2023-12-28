@@ -30,7 +30,7 @@ def analyze_frame_with_openai_vision(encoded_frame):
         ],
         max_tokens=300,
     )
-    return response.choices[0].message['content']
+    return response.choices[0].message.content
 
 video_files = st.file_uploader("Upload a video file", type=['.mp4', '.avi', '.mov', '.mkv'], accept_multiple_files=True)
 
