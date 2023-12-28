@@ -39,8 +39,8 @@ fps = video.get(cv2CAP_PROP_FPS)
 duration = total_frames / fps
 
     # Define the slider with the total number of frames as the max value and the range within that you want to grab
-    start_time = st.slider("Start Time (seconds)", 0.0, duration, 0.0, 0.1)
-    end_time = st.slider("End Time (seconds)", 0.0, duration, duration, 0.1)
+start_time = st.slider("Start Time (seconds)", 0.0, duration, 0.0, 0.1)
+end_time = st.slider("End Time (seconds)", 0.0, duration, duration, 0.1)
 	if st.button('Extract Video Segment'):
         start_frame = int(start_time * fps)
         end_frame = int(end_time * fps)
