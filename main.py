@@ -211,5 +211,7 @@ if ctx.video_processor:
         st.write("Recording started.")
 
     if st.button("Stop Recording"):
+        video_filename = "output.mp4"
         ctx.video_processor.stop_recording("output.mp4")
         st.write("Recording stopped. Video saved as output.mp4.")
+        st.video(video_filename)
