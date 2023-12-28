@@ -10,6 +10,8 @@ import time
 #from openai import OpenAI
 import os
 import requests
+#activate webcam
+from streamlit_webrtc import webrtc_streamer
 
 #client = OpenAI()
 st.write('Welcome to your Athlete Analysis dashboard')
@@ -44,4 +46,5 @@ for video_file in video_files:
 
     video.release()
 
+webrtc_streamer(key='Key')
 
