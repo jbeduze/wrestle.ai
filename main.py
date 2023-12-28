@@ -43,11 +43,23 @@ start_time = st.slider("Start Time (seconds)", 0.0, duration, 0.0, 0.1)
 end_time = st.slider("End Time (seconds)", 0.0, duration, duration, 0.1)
 if st.button('Extract Video Segment'):
 	start_frame = int(start_time * fps)
-        end_frame = int(end_time * fps)
+	# end_frame = int(end_time * fps)
+	fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        	out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.get(4))))
+
+        	for _ in range(start_frame, end_frame):
+           	 ret, frame = video.read()
+            	if not ret:
+               	 break
+	            out.write(frame)
+
+        	out.release()
+        	st.video('output.mp4')
     # Set the video to the selected frame
-    video.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
-    success, frame = video.read()
-    if success:
+    	video.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+    	success, frame = video.read()
+
+    	if success:
         # Convert the frame to an image displayable in Streamlit
         _, buffer = cv2.imencode('.jpg', frame)
         st.image(buffer.tobytes(), channels="BGR")
