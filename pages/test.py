@@ -4,6 +4,7 @@ import tempfile
 import base64
 import os
 from openai import OpenAI
+import time
 
 # Initialize the OpenAI client (configure with your API key)
 client = OpenAI(api_key=st.secrets.openai_api_key)
@@ -52,7 +53,8 @@ for video_file in video_files:
             encoded_frame = encode_image(frame)
             result = analyze_frame_with_openai_vision(encoded_frame)
             analysis_results.append((frame_idx, result))
-    
+            st.markdown(result)
+            time.sleep(1)
     video.release()
 
     # Display analysis results

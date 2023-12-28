@@ -46,7 +46,7 @@ def main():
     client = OpenAI(api_key=st.secrets.openai_api_key)
 
     # Open PC's internal camera
-    video = cv2.VideoCapture(0)
+    video = cv2.VideoCapture(1)
 
     # Queue to hold the texts of the most recent 5 frames
     previous_texts = deque(maxlen=5)
