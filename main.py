@@ -49,8 +49,20 @@ video = cv2.VideoCapture(tmp_file_path)
 
 # Get the total number of frames and calculate duration
 total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+frame_number = st.slider("Select Frame", 1, total_frames)
 fps = video.get(cv2.CAP_PROP_FPS)
 duration = total_frames / fps
+
+ # Set frame position
+cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+
+ret, frame = cap.read()
+
+if ret:
+    st.image(Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)))
+
+cap.release()
+
 
     # # Define the slider with the total number of frames as the max value and the range within that you want to grab
     # start_time = st.slider("Start Time (seconds)", 0.0, duration, 0.0, 0.1, key=f"{video_file.name}_start")
