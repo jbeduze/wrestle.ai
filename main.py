@@ -52,11 +52,32 @@ for video_file in video_files:
     start_time = st.slider("Start Time (seconds)", 0.0, duration, 0.0, 0.1)
     end_time = st.slider("End Time (seconds)", 0.0, duration, duration, 0.1)
 
-    if st.button('Extract Video Segment'):
-        start_frame = int(start_time * fps)
-        end_frame = int(end_time * fps)
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.get(4))))
+    # if st.button('Extract Video Segment'):
+    #     start_frame = int(start_time * fps)
+    #     end_frame = int(end_time * fps)
+    #     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    #     out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.get(4))))
+
+    #     video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
+
+    #     for _ in range(start_frame, end_frame):
+    #         ret, frame = video.read()
+    #         if not ret:
+    #             break
+    #         out.write(frame)
+
+    #     out.release()
+    #     st.video('output.mp4')
+
+    # video.release()
+if st.button('Extract Video Segment'):
+    start_frame = int(start_time * fps)
+    end_frame = int(end_time * fps)
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+
+    # Create a temporary file for the extracted video segment
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as segment_file:
+        out = cv2.VideoWriter(segment_file.name, fourcc, fps, (int(video.get(3)), int(video.get(4))))
 
         video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
 
@@ -67,9 +88,9 @@ for video_file in video_files:
             out.write(frame)
 
         out.release()
-        st.video('output.mp4')
 
-    video.release()
+        # Display the extracted video segment
+        st.video(segment_file.name)
 '---'
 st.subheader('Live Video Analysis')
 from streamlit_webrtc import webrtc_streamer, RTCConfiguration, VideoProcessorBase
