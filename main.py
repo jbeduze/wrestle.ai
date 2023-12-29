@@ -138,7 +138,7 @@ if ctx.video_processor:
         st.write("Recording stopped. Video saved as output.mp4.")
         st.video(video_filename)
 
-         if os.path.exists(video_filename) and os.path.getsize(video_filename) > 0:
+        if os.path.exists(video_filename) and os.path.getsize(video_filename) > 0:
             st.write(f"Video saved as {video_filename}.")
             st.video(video_filename)
         else:
