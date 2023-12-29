@@ -31,6 +31,17 @@ st.write("If you choose to upload files into this software or take live videos, 
 st.subheader('Upload an Existing Video File')
 video_files = st.file_uploader("",type=['.mp4', '.avi', '.mov', '.mkv'], accept_multiple_files=True)
 
+
+ # Set the video to the selected frame
+    video.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+    success, frame = video.read()
+    if success:
+        # Convert the frame to an image displayable in Streamlit
+        _, buffer = cv2.imencode('.jpg', frame)
+        st.image(buffer.tobytes(), channels="BGR")
+
+    video.release()    
+
 for video_file in video_files:
     # Save the uploaded video file to a temporary file
     with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as tmp_file:
