@@ -20,27 +20,17 @@ import streamlit as st
 import cv2
 import tempfile
 
-haar_url = "https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml?raw=true"
-haar_file = "haarcascade_frontalface_default.xml"
-urllib.request.urlretrieve(haar_url, haar_file)
+import streamlit as st
+import cv2
+import tempfile
+import urllib.request
 
 # ... [rest of your imports]
 
 st.write('Welcome to your Athlete Analysis dashboard')
 st.write("If you choose to upload files into this software or take live videos, all is possible!")
 st.subheader('Upload an Existing Video File')
-video_files = st.file_uploader("",type=['.mp4', '.avi', '.mov', '.mkv'], accept_multiple_files=True)
-
-
-# Set the video to the selected frame
-video.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
-success, frame = video.read()
-if success:
-    # Convert the frame to an image displayable in Streamlit
-    _, buffer = cv2.imencode('.jpg', frame)
-    st.image(buffer.tobytes(), channels="BGR")
-
-video.release()
+video_files = st.file_uploader("", type=['.mp4', '.avi', '.mov', '.mkv'], accept_multiple_files=True)
 
 for video_file in video_files:
     # Save the uploaded video file to a temporary file
@@ -60,10 +50,10 @@ for video_file in video_files:
     duration = total_frames / fps
 
     # Define the slider with the total number of frames as the max value and the range within that you want to grab
-    start_time = st.slider("Start Time (seconds)", 0.0, duration, 0.0, 0.1)
-    end_time = st.slider("End Time (seconds)", 0.0, duration, duration, 0.1)
+    start_time = st.slider("Start Time (seconds)", 0.0, duration, 0.0, 0.1, key=f"{video_file.name}_start")
+    end_time = st.slider("End Time (seconds)", 0.0, duration, duration, 0.1, key=f"{video_file.name}_end")
 
-    if st.button('Extract Video Segment'):
+    if st.button('Extract Video Segment', key=f"{video_file.name}_extract"):
         start_frame = int(start_time * fps)
         end_frame = int(end_time * fps)
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
@@ -81,6 +71,68 @@ for video_file in video_files:
         st.video('output.mp4')
 
     video.release()
+
+haar_url = "https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml?raw=true"
+haar_file = "haarcascade_frontalface_default.xml"
+urllib.request.urlretrieve(haar_url, haar_file)
+
+# # ... [rest of your imports]
+
+# st.write('Welcome to your Athlete Analysis dashboard')
+# st.write("If you choose to upload files into this software or take live videos, all is possible!")
+# st.subheader('Upload an Existing Video File')
+# video_files = st.file_uploader("",type=['.mp4', '.avi', '.mov', '.mkv'], accept_multiple_files=True)
+
+
+# # Set the video to the selected frame
+# video.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+# success, frame = video.read()
+# if success:
+#     # Convert the frame to an image displayable in Streamlit
+#     _, buffer = cv2.imencode('.jpg', frame)
+#     st.image(buffer.tobytes(), channels="BGR")
+
+# video.release()
+
+# for video_file in video_files:
+#     # Save the uploaded video file to a temporary file
+#     with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as tmp_file:
+#         tmp_file.write(video_file.read())
+#         tmp_file_path = tmp_file.name
+
+#     # Display the video
+#     st.video(tmp_file_path)
+
+#     # Load the video using OpenCV
+#     video = cv2.VideoCapture(tmp_file_path)
+
+#     # Get the total number of frames and calculate duration
+#     total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+#     fps = video.get(cv2.CAP_PROP_FPS)
+#     duration = total_frames / fps
+
+#     # Define the slider with the total number of frames as the max value and the range within that you want to grab
+#     start_time = st.slider("Start Time (seconds)", 0.0, duration, 0.0, 0.1)
+#     end_time = st.slider("End Time (seconds)", 0.0, duration, duration, 0.1)
+
+#     if st.button('Extract Video Segment'):
+#         start_frame = int(start_time * fps)
+#         end_frame = int(end_time * fps)
+#         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+#         out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.get(4))))
+
+#         video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
+
+#         for _ in range(start_frame, end_frame):
+#             ret, frame = video.read()
+#             if not ret:
+#                 break
+#             out.write(frame)
+
+#         out.release()
+#         st.video('output.mp4')
+
+#     video.release()
 
 '---'
 st.subheader('Live Video Analysis')
