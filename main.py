@@ -40,7 +40,7 @@ if success:
     _, buffer = cv2.imencode('.jpg', frame)
     st.image(buffer.tobytes(), channels="BGR")
 
- video.release()    
+ video.release()
 
 for video_file in video_files:
     # Save the uploaded video file to a temporary file
