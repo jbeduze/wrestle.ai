@@ -35,7 +35,7 @@ video_files = st.file_uploader("",type=['.mp4', '.avi', '.mov', '.mkv'], accept_
 # Set the video to the selected frame
 video.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
 success, frame = video.read()
- if success:
+if success:
     # Convert the frame to an image displayable in Streamlit
     _, buffer = cv2.imencode('.jpg', frame)
     st.image(buffer.tobytes(), channels="BGR")
