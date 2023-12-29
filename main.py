@@ -48,8 +48,8 @@ for video_file in video_files:
 video = cv2.VideoCapture(tmp_file_path)
 
 # Get the total number of frames and calculate duration
-total_frames = int(tmp_file_path.get(cv2.CAP_PROP_FRAME_COUNT))
-fps = tmp_file_path.get(cv2.CAP_PROP_FPS)
+total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+fps = video.get(cv2.CAP_PROP_FPS)
 duration = total_frames / fps
 
     # # Define the slider with the total number of frames as the max value and the range within that you want to grab
