@@ -25,6 +25,9 @@ import cv2
 import tempfile
 import urllib.request
 
+with open( "app\style.css" ) as css:
+    st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
+
 #facial recognition
 haar_url = "https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml?raw=true"
 haar_file = "haarcascade_frontalface_default.xml"
