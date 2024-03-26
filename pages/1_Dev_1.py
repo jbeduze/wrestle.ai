@@ -44,7 +44,7 @@ if video_files:
     total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
     fps = video.get(cv2.CAP_PROP_FPS)
     duration = total_frames / fps
-    return total_frames
+    st.write(f"Total frames in the uploaded video: {total_frames}")
 else:
     st.warning("Please upload a video")
     # Display the video
