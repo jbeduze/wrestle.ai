@@ -25,8 +25,8 @@ import cv2
 import tempfile
 import urllib.request
 
-with open( "app/style.css" ) as css:
-    st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
+# with open( "app/style.css" ) as css:
+#     st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
 st.write("example text")
 #facial recognition
 haar_url = "https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml?raw=true"
@@ -69,28 +69,28 @@ if ret:
 cap.release()
 
 
-    # # Define the slider with the total number of frames as the max value and the range within that you want to grab
-    # start_time = st.slider("Start Time (seconds)", 0.0, duration, 0.0, 0.1, key=f"{video_file.name}_start")
-    # end_time = st.slider("End Time (seconds)", 0.0, duration, duration, 0.1, key=f"{video_file.name}_end")
+# Define the slider with the total number of frames as the max value and the range within that you want to grab
+start_time = st.slider("Start Time (seconds)", 0.0, duration, 0.0, 0.1, key=f"{video_file.name}_start")
+end_time = st.slider("End Time (seconds)", 0.0, duration, duration, 0.1, key=f"{video_file.name}_end")
 
-    # if st.button('Extract Video Segment', key=f"{video_file.name}_extract"):
-    #     start_frame = int(start_time * fps)
-    #     end_frame = int(end_time * fps)
-    #     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    #     out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.get(4))))
+if st.button('Extract Video Segment', key=f"{video_file.name}_extract"):
+    start_frame = int(start_time * fps)
+    end_frame = int(end_time * fps)
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.get(4))))
 
-    #     video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
+    video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
 
-    #     for _ in range(start_frame, end_frame):
-    #         ret, frame = video.read()
-    #         if not ret:
-    #             break
-    #         out.write(frame)
+    for _ in range(start_frame, end_frame):
+        ret, frame = video.read()
+        if not ret:
+            break
+        out.write(frame)
 
-    #     out.release()
-    #     st.video('output.mp4')
+    out.release()
+    st.video('output.mp4')
 
-    # video.release()
+video.release()
 
 
 
