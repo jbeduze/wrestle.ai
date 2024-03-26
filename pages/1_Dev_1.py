@@ -28,12 +28,14 @@ st.write("If you choose to upload files into this software or take live videos, 
 st.subheader('Upload an Existing Video File')
 video_files = st.file_uploader("",type=['.mp4', '.avi', '.mov', '.mkv'], accept_multiple_files=True)
 
-for video_file in video_files:
-    # Save the uploaded video file to a temporary file
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as tmp_file:
-        tmp_file.write(video_file.read())
-        tmp_file_path = tmp_file.name
-
+if video_files:
+    for video_file in video_files:
+        # Save the uploaded video file to a temporary file
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as tmp_file:
+            tmp_file.write(video_file.read())
+            tmp_file_path = tmp_file.name
+else:
+    st.warning("Please
     # Display the video
     st.video(tmp_file_path)
 
