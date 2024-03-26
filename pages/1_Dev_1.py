@@ -34,9 +34,7 @@ if video_files:
         with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as tmp_file:
             tmp_file.write(video_file.read())
             tmp_file_path = tmp_file.name
-else:
-    st.warning("Please
-    # Display the video
+
     st.video(tmp_file_path)
 
     # Load the video using OpenCV
@@ -46,6 +44,11 @@ else:
     total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
     fps = video.get(cv2.CAP_PROP_FPS)
     duration = total_frames / fps
+    return total_frames
+else:
+    st.warning("Please upload a video")
+    # Display the video
+    
 
 # Define the slider with the total number of frames as the max value and the range within that you want to grab
 # Define the range slider for selecting start and end times
