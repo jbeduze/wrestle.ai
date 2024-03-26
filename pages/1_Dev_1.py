@@ -40,36 +40,36 @@ else:
     st.warning("Please upload a video")
 
     # Load the video using OpenCV
-    video = cv2.VideoCapture(tmp_file_path)
+video = cv2.VideoCapture(tmp_file_path)
 
-    # Get the total number of frames and calculate duration
-    total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
-    fps = video.get(cv2.CAP_PROP_FPS)
-    duration = total_frames / fps
-    st.write(f"Total frames in the uploaded video: {total_frames}")
-# with st.expander(f"Select Frame Range of the {total_frames} from the upload"):
-#         # Define the range slider for selecting start and end frames within the expander
+# Get the total number of frames and calculate duration
+total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+fps = video.get(cv2.CAP_PROP_FPS)
+duration = total_frames / fps
+st.write(f"Total frames in the uploaded video: {total_frames}")
+with st.expander(f"Select Frame Range of the {total_frames} from the upload"):
+        # Define the range slider for selecting start and end frames within the expander
     
-#     start_frame, end_frame = st.slider("Frame Range", 0, total_frames, (0, total_frames))
-#     # Make sure to release the video capture object
-#     if st.button("Extract Video Segment"):
-#         # start_frame = int(start_time * fps)
-#         # end_frame = int(end_time * fps)
-#         # with segment_file.NamedTemporaryFile(delete=False, suffix='.mp4') as segment_file:
-#         #     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-#         #     out = cv2.VideoWriter('segment_file.name', fourcc, fps, (int(video.get(3)), int(video.get(4))))
+    start_frame, end_frame = st.slider("Frame Range", 0, total_frames, (0, total_frames))
+    # Make sure to release the video capture object
+    if st.button("Extract Video Segment"):
+        # start_frame = int(start_time * fps)
+        # end_frame = int(end_time * fps)
+        # with segment_file.NamedTemporaryFile(delete=False, suffix='.mp4') as segment_file:
+        #     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        #     out = cv2.VideoWriter('segment_file.name', fourcc, fps, (int(video.get(3)), int(video.get(4))))
     
-#         #     video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
+        #     video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
     
-#         #     for _ in range(start_frame, end_frame):
-#         #         ret, frame = video.read()
-#         #         if ret and video.get(cv2.CAP_PROP_POS_FRAMES) <= end_frame:
-#         #             out.write(frame)
-#         #         else:
-#         #             break
-#         # video.release()
+        #     for _ in range(start_frame, end_frame):
+        #         ret, frame = video.read()
+        #         if ret and video.get(cv2.CAP_PROP_POS_FRAMES) <= end_frame:
+        #             out.write(frame)
+        #         else:
+        #             break
+        # video.release()
 
-# # Display the video
+# Display the video
     
 
 # Define the slider with the total number of frames as the max value and the range within that you want to grab
