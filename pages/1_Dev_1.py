@@ -45,6 +45,12 @@ if video_files:
     fps = video.get(cv2.CAP_PROP_FPS)
     duration = total_frames / fps
     st.write(f"Total frames in the uploaded video: {total_frames}")
+    with st.expander("Select Frame Range of the {total_frames} from the upload"):
+            # Define the range slider for selecting start and end frames within the expander
+        st.write(f"Selected frame range: {start_frame} to {end_frame}")
+        start_frame, end_frame = st.slider("Frame Range", 0, total_frames, (0, total_frames))
+        # Make sure to release the video capture object
+        video.release()
 else:
     st.warning("Please upload a video")
     # Display the video
