@@ -69,7 +69,7 @@ with st.expander(f"Select Frame Range of the {total_frames} from the upload"):
                     break
         video.release()
 
-Display the video
+#Display the video
     
 
 # Define the slider with the total number of frames as the max value and the range within that you want to grab
