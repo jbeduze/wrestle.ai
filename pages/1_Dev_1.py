@@ -55,7 +55,7 @@ if st.button('Extract Video Segment'):
     end_frame = int(end_time * fps)
     with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as segment_file:
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.get(4))))
+        out = cv2.VideoWriter('segment_file.name', fourcc, fps, (int(video.get(3)), int(video.get(4))))
 
         video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
 
