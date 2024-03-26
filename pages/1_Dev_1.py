@@ -53,16 +53,18 @@ start_time, end_time = st.slider("Select Time Range (seconds)", 0.0, duration, (
 if st.button('Extract Video Segment'):
     start_frame = int(start_time * fps)
     end_frame = int(end_time * fps)
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.get(4))))
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as segment_file:
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        out = cv2.VideoWriter('output.mp4', fourcc, fps, (int(video.get(3)), int(video.get(4))))
 
-    video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
+        video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
 
-    for _ in range(start_frame, end_frame):
-        ret, frame = video.read()
-        if not ret:
-            break
-        out.write(frame)
+        for _ in range(start_frame, end_frame):
+            ret, frame = video.read()
+            if ret and video.get(cv2.CAP_PROP_POS_FRAMES) <= end_frame:
+                out.write(frame)
+            else:
+                break
 
     out.release()
     st.video('output.mp4')
