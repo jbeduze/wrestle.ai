@@ -53,30 +53,29 @@ with st.expander(f"Select Frame Range of the {total_frames} from the upload"):
     start_frame, end_frame = st.slider("Frame Range", 0, total_frames, (0, total_frames))
     # Make sure to release the video capture object
     if st.button("Extract Video Segment"):
-        # start_frame = int(start_time * fps)
-        # end_frame = int(end_time * fps)
-        # with segment_file.NamedTemporaryFile(delete=False, suffix='.mp4') as segment_file:
-        #     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        #     out = cv2.VideoWriter('segment_file.name', fourcc, fps, (int(video.get(3)), int(video.get(4))))
+        start_frame = int(start_time * fps)
+        end_frame = int(end_time * fps)
+        with segment_file.NamedTemporaryFile(delete=False, suffix='.mp4') as segment_file:
+            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+            out = cv2.VideoWriter('segment_file.name', fourcc, fps, (int(video.get(3)), int(video.get(4))))
     
-        #     video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
+            video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
     
-        #     for _ in range(start_frame, end_frame):
-        #         ret, frame = video.read()
-        #         if ret and video.get(cv2.CAP_PROP_POS_FRAMES) <= end_frame:
-        #             out.write(frame)
-        #         else:
-        #             break
-        # video.release()
+            for _ in range(start_frame, end_frame):
+                ret, frame = video.read()
+                if ret and video.get(cv2.CAP_PROP_POS_FRAMES) <= end_frame:
+                    out.write(frame)
+                else:
+                    break
+        video.release()
 
-# Display the video
+Display the video
     
 
 # Define the slider with the total number of frames as the max value and the range within that you want to grab
 # Define the range slider for selecting start and end times
 with st.expander("Select Time Range"):
     start_time, end_time = st.slider("Select Time Range (seconds)", 0.0, duration, (0.0, duration), 0.1)
-
 
     if st.button('Extract Video Segment'):
         start_frame = int(start_time * fps)
