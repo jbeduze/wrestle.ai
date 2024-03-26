@@ -7,10 +7,10 @@ from IPython.display import display, Image, Audio
 import cv2
 import base64
 import time
-#from openai import OpenAI
+from openai import OpenAI
 import os
 import requests
-#activate webcam
+activate webcam
 from streamlit_webrtc import webrtc_streamer, RTCConfiguration
 import av
 import urllib.request
