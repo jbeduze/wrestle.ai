@@ -50,22 +50,22 @@ if video_files:
         
         start_frame, end_frame = st.slider("Frame Range", 0, total_frames, (0, total_frames))
         # Make sure to release the video capture object
-        if st.button('Extract Video Segment'):
-            start_frame = int(start_time * fps)
-            end_frame = int(end_time * fps)
-            with segment_file.NamedTemporaryFile(delete=False, suffix='.mp4') as segment_file:
-                fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-                out = cv2.VideoWriter('segment_file.name', fourcc, fps, (int(video.get(3)), int(video.get(4))))
+        if st.button("Extract Video Segment"):
+            # start_frame = int(start_time * fps)
+            # end_frame = int(end_time * fps)
+            # with segment_file.NamedTemporaryFile(delete=False, suffix='.mp4') as segment_file:
+            #     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+            #     out = cv2.VideoWriter('segment_file.name', fourcc, fps, (int(video.get(3)), int(video.get(4))))
         
-                video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
+            #     video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
         
-                for _ in range(start_frame, end_frame):
-                    ret, frame = video.read()
-                    if ret and video.get(cv2.CAP_PROP_POS_FRAMES) <= end_frame:
-                        out.write(frame)
-                    else:
-                        break
-            video.release()
+            #     for _ in range(start_frame, end_frame):
+            #         ret, frame = video.read()
+            #         if ret and video.get(cv2.CAP_PROP_POS_FRAMES) <= end_frame:
+            #             out.write(frame)
+            #         else:
+            #             break
+            # video.release()
 else:
     st.warning("Please upload a video")
     # Display the video
