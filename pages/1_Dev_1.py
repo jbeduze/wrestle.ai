@@ -36,6 +36,8 @@ if video_files:
             tmp_file_path = tmp_file.name
 
     st.video(tmp_file_path)
+else:
+    st.warning("Please upload a video")
 
     # Load the video using OpenCV
     video = cv2.VideoCapture(tmp_file_path)
@@ -66,8 +68,7 @@ if video_files:
             #         else:
             #             break
             # video.release()
-else:
-    st.warning("Please upload a video")
+
     # Display the video
     
 
