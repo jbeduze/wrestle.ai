@@ -74,7 +74,7 @@ else:
 
 # Define the slider with the total number of frames as the max value and the range within that you want to grab
 # Define the range slider for selecting start and end times
-with st.expander(f"Select Time Range"):
+with st.expander("Select Time Range"):
     start_time, end_time = st.slider("Select Time Range (seconds)", 0.0, duration, (0.0, duration), 0.1)
 
 
