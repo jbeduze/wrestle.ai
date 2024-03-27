@@ -29,14 +29,14 @@ if video_files:
 
             if st.button("Extract Video Segment from original"):
                 # Extract the segment
-                segment_clip = clip.subclip(start_time, end_time)
+                sec_segment_clip = clip.subclip(start_time, end_time)
                 
                 # Save the segment to a temporary file
-                with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as segment_file:
-                    segment_clip.write_videofile(segment_file.name, codec="libx264", audio_codec="aac")
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as sec_segment_file:
+                    sec_segment_clip.write_videofile(sec_segment_file.name, codec="libx264", audio_codec="aac")
 
                     # Display the segment
-                    st.video(segment_file.name)
+                    st.video(sec_segment_file.name)
 
             else: st.warning("Please select a range to create a video segment")
 #2nd expander for the frames to be displayed              
@@ -45,13 +45,13 @@ if video_files:
             start_frame, end_frame = st.slider("Frame Range", 0, total_frames, (0, total_frames))
             if st.button("Extract Frames Segment from original"):
                 # Extract the segment
-                segment_clip = clip.subclip(start_time, end_time)
+                frame_segment_clip = clip.subclip(start_time, end_time)
                 
                 # Save the segment to a temporary file
-                with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as segment_file:
-                    segment_clip.write_videofile(segment_file.name, codec="libx264", audio_codec="aac")
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as frame_segment_file:
+                    frame_segment_clip.write_videofile(frame_segment_file.name, codec="libx264", audio_codec="aac")
 
                     # Display the segment
-                    st.video(segment_file.name)
+                    st.video(frame_segment_file.name)
 
             else: st.warning("Please select a range to create a video segment")
