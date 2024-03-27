@@ -54,4 +54,4 @@ if video_files:
                     # Display the segment
                     st.video(frame_segment_file.name)
 
-            else: st.warning("Please select a range to create a video segment")
+            else: st.warning("Please select a Frame range to create a video segment")
