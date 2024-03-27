@@ -60,7 +60,7 @@ with st.expander(f"Select Frame Range of the {total_frames} from the upload"):
             fourcc = cv2.VideoWriter_fourcc(*'mp4v')
             out = cv2.VideoWriter('segment_file.name', fourcc, fps, (int(video.get(3)), int(video.get(4))))
         clip1 = VideoFileClip("tmp_file_path").subclip(start_frame, end_frame)
-            video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
+        video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
         return clip1()
     
             for _ in range(start_frame, end_frame):
