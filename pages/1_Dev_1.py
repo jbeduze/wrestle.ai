@@ -4,7 +4,7 @@ import pandas as pd
 import pygwalker as pyg
 import tempfile
 from IPython.display import display, Image, Audio
-from movie.editor import VideoFileClip
+from moviepy.editor import VideoFileClip
 import cv2
 import base64
 import time
