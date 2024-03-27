@@ -11,3 +11,5 @@ tensorflow
 
 #for activating webcam
 streamlit-webrtc
+
+moviepy
