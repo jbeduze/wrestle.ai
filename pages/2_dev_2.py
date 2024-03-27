@@ -23,7 +23,7 @@ if video_files:
 
 
 #1st expander for the seconds to be displayed     
-        with st.expander(f"Select Frame Range of the {total_frames} from the upload"):
+        with st.expander(f"Select time Range of the {clip.duration} seconds total from the upload"):
 # Define the range slider for selecting start and end times within the expander
             start_time, end_time = st.slider("Time Range (seconds)", 0.0, clip.duration, (0.0, clip.duration))
 
@@ -43,7 +43,7 @@ if video_files:
         with st.expander(f"Select Frame Range of the {total_frames} from the upload"):
 # Define the range slider for selecting start and end Frames within the expander
             start_frame, end_frame = st.slider("Frame Range", 0, total_frames, (0, total_frames))
-            if st.button("Extract Video Segment from original"):
+            if st.button("Extract Frames Segment from original"):
                 # Extract the segment
                 segment_clip = clip.subclip(start_time, end_time)
                 
