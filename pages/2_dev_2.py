@@ -34,7 +34,7 @@ if video_files:
                 # Save the segment to a temporary file
                 with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as sec_segment_file:
                     sec_segment_clip.write_videofile(sec_segment_file.name, codec="libx264", audio_codec="aac")
-
+                    sec_segment_file_path = sec_segment_file.name
                     # Display the segment
                     st.video(sec_segment_file.name)
 
