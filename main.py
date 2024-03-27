@@ -16,14 +16,6 @@ import av
 import urllib.request
 
 
-import streamlit as st
-import cv2
-import tempfile
-
-import streamlit as st
-import cv2
-import tempfile
-import urllib.request
 
 # with open( "app/style.css" ) as css:
 #     st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
