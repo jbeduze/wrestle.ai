@@ -4,6 +4,7 @@ import pandas as pd
 import pygwalker as pyg
 import tempfile
 from IPython.display import display, Image, Audio
+from movie.editor import as VideoFileClip
 import cv2
 import base64
 import time
@@ -58,8 +59,9 @@ with st.expander(f"Select Frame Range of the {total_frames} from the upload"):
         with segment_file.NamedTemporaryFile(delete=False, suffix='.mp4') as segment_file:
             fourcc = cv2.VideoWriter_fourcc(*'mp4v')
             out = cv2.VideoWriter('segment_file.name', fourcc, fps, (int(video.get(3)), int(video.get(4))))
-    
+        with clip1= VideoFileClip("tmp_file_path").subclip(start_frame, end_frame)
             video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
+        return clip1()
     
             for _ in range(start_frame, end_frame):
                 ret, frame = video.read()
