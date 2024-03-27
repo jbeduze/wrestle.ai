@@ -63,13 +63,13 @@ with st.expander(f"Select Frame Range of the {total_frames} from the upload"):
         video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
     return clip1()
     
-        for _ in range(start_frame, end_frame):
-            ret, frame = video.read()
-            if ret and video.get(cv2.CAP_PROP_POS_FRAMES) <= end_frame:
-                out.write(frame)
-            else:
-                break
-    video.release()
+    #     for _ in range(start_frame, end_frame):
+    #         ret, frame = video.read()
+    #         if ret and video.get(cv2.CAP_PROP_POS_FRAMES) <= end_frame:
+    #             out.write(frame)
+    #         else:
+    #             break
+    # video.release()
 
 #Display the video
     
