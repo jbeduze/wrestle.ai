@@ -40,7 +40,7 @@ else:
     st.warning("Please upload a video")
 
     # Load the video using OpenCV
-video = cv2.VideoCapture(tmp_file_path)
+# video = cv2.VideoCapture(tmp_file_path)
 
 # Get the total number of frames and calculate duration
 total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
