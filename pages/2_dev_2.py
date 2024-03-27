@@ -38,7 +38,18 @@ if video_files:
                     # Display the segment
                     st.video(sec_segment_file.name)
 
+                    # Display a download button for the video segment
+                    with open(sec_segment_file_path, "rb") as file:
+                        btn = st.download_button(
+                                label="Download Video Segment",
+                                data=file,
+                                file_name="video_segment.mp4",
+                                mime="video/mp4"
+                            )
+
             else: st.warning("Please select a range to create a video segment")
+
+        
 #2nd expander for the frames to be displayed              
         with st.expander(f"Select Frame Range of the {total_frames} from the upload"):
 # Define the range slider for selecting start and end Frames within the expander
