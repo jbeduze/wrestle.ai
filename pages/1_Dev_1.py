@@ -41,7 +41,7 @@ else:
     st.warning("Please upload a video")
 
     # Load the video using OpenCV
-# video = cv2.VideoCapture(tmp_file_path)
+video = cv2.VideoCapture(tmp_file_path)
 
 # Get the total number of frames and calculate duration
 total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -61,7 +61,7 @@ with st.expander(f"Select Frame Range of the {total_frames} from the upload"):
             out = cv2.VideoWriter('segment_file.name', fourcc, fps, (int(video.get(3)), int(video.get(4))))
         clip1 = VideoFileClip("tmp_file_path").subclip(start_frame, end_frame)
         video.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
-        # return clip1
+    return clip1()
     
         for _ in range(start_frame, end_frame):
             ret, frame = video.read()
