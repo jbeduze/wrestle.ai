@@ -49,8 +49,10 @@ if video_file_buffer is not None:
     with col1:
         st.write("Previous Frame")
         if st.session_state.frame_number > 0:
+            #displaying previous frame in column 1
             prev_frame = get_frame(cap, st.session_state.frame_number - 1)
             st.image(prev_frame)
+            st.caption(f"Frame {st.session_state.frame_number - 1}")
         else:
             st.write("No previous frame")
     
@@ -58,12 +60,13 @@ if video_file_buffer is not None:
         st.write("Current Frame")
         curr_frame = get_frame(cap, st.session_state.frame_number)
         st.image(curr_frame)
-    
+        st.caption(f"Frame {st.session_state.frame_number}")
     with col3:
         st.write("Next Frame")
         if st.session_state.frame_number < st.session_state.total_frames - 1:
             next_frame = get_frame(cap, st.session_state.frame_number + 1)
             st.image(next_frame)
+            st.caption(f"Frame {st.session_state.frame_number + 1}")
         else:
             st.write("No next frame")
 
