@@ -3,8 +3,8 @@ import cv2
 import tempfile
 import numpy as np
 
-def get_frame(cap, time_in_seconds):
-    """Seek to the specified time and return the frame."""
+def get_frame(cap, time_in_seconds, fps):
+    """Seek to the specified time in seconds and return the frame and frame number."""
     frame_number = int(time_in_seconds * fps)
     cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
     ret, frame = cap.read()
@@ -28,19 +28,36 @@ if video_file_buffer is not None:
     fps = cap.get(cv2.CAP_PROP_FPS)
     duration = total_frames / fps
 
+    if 'selected_time' not in st.session_state:
+        st.session_state.selected_time = 0.0
+
+    # Adjust the current time by one frame
+    def adjust_time(delta):
+        st.session_state.selected_time = min(max(0, st.session_state.selected_time + delta), duration)
+
     # Play the video
     st.video(video_path)
 
+    # Frame navigation buttons
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col1:
+        st.button('Previous Frame', on_click=adjust_time, args=(-1/fps,))
+    with col3:
+        st.button('Next Frame', on_click=adjust_time, args=(1/fps,))
+
     # Time slider
-    selected_time = st.slider('Select Time (seconds)', 0.0, duration, 0.0, 0.01)
+    selected_time = st.slider('Select Time (seconds)', 0.0, duration, st.session_state.selected_time, 0.01, key='selected_time_slider')
+
+    # Update the selected time based on the slider's value
+    st.session_state.selected_time = selected_time
 
     # Display the current, next, and previous frames based on selected time
-    current_frame, frame_number = get_frame(cap, selected_time)
+    current_frame, frame_number = get_frame(cap, selected_time, fps)
     col1, col2, col3 = st.columns(3)
 
     with col1:  # Previous frame
         if frame_number > 0:
-            prev_frame, _ = get_frame(cap, max(selected_time - 1/fps, 0))
+            prev_frame, _ = get_frame(cap, max(selected_time - 1/fps, 0), fps)
             st.image(prev_frame)
             st.caption(f"Time: {max(selected_time - 1/fps, 0):.2f}s (Frame {frame_number - 1})")
         else:
@@ -52,7 +69,7 @@ if video_file_buffer is not None:
 
     with col3:  # Next frame
         if frame_number < total_frames - 1:
-            next_frame, _ = get_frame(cap, min(selected_time + 1/fps, duration))
+            next_frame, _ = get_frame(cap, min(selected_time + 1/fps, duration), fps)
             st.image(next_frame)
             st.caption(f"Time: {min(selected_time + 1/fps, duration):.2f}s (Frame {frame_number + 1})")
         else:
