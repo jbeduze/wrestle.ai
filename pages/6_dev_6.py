@@ -26,8 +26,8 @@ if video_file_buffer is not None:
     st.video(video_path)
     
 options = st.selectbox(
-    "Extract either  a single frame or video segment for analysis", 
-    ("Video Segment", "Single Image")
+    "Extract either a single frame or video segment for analysis", 
+    ("Video Segment", "Single Image"),
     index=None,
     placeholder="Select imaging method...",
 )
