@@ -63,21 +63,5 @@ if video_file_buffer is not None and st.button("Extract Segment"):
                 mime="video/mp4"
             )
     os.remove(output_path)  # Clean up the temporary file
-def extract_video_segment(video_path, start_time, end_time, output_path):
-    clip = VideoFileClip(video_path).subclip(start_time, end_time)
-    clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
-    clip.close()
 
-if video_file_buffer is not None and st.button("Extract Segment"):
-    output_path = tempfile.mktemp(suffix=".mp4")
-    extract_video_segment(video_path, start_time, end_time, output_path)
-    
-    with open(output_path, "rb") as file:
-        btn = st.download_button_final(
-                label="Download Video Segment",
-                data=file,
-                file_name="extracted_segment.mp4",
-                mime="video/mp4"
-            )
-    os.remove(output_path)  # Clean up the temporary file
 
