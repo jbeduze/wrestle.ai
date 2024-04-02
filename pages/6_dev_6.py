@@ -5,19 +5,33 @@ import numpy as np
 from moviepy.editor import VideoFileClip
 import os
 
+# Define functions outside of the main logic
+def get_frame_at_time(video_path, time_in_seconds):
+    """Extract a frame at a specific time from the video."""
+    with VideoFileClip(video_path) as clip:
+        frame = clip.get_frame(time_in_seconds)
+    return frame
+
+def extract_video_segment(video_path, start_time, end_time, output_path):
+    """Extract a video segment between start_time and end_time, save to output_path."""
+    with VideoFileClip(video_path) as clip:
+        segment = clip.subclip(start_time, end_time)
+        segment.write_videofile(output_path, codec="libx264", audio_codec="aac")
+
 st.title('Video Segment Extractor')
-st.write("upload video, see start frame and end frame based on the positions on the slider, then be able to download the slider selected video segment")
+st.write("Upload a video, see start frame and end frame based on the positions on the slider, then be able to download the slider-selected video segment.")
 
 video_file_buffer = st.file_uploader("Upload a Video", type=["mp4", "mov", "avi", "mkv"])
 if video_file_buffer is not None:
-    tfile = tempfile.NamedTemporaryFile(delete=False, suffix='.mp4')
-    tfile.write(video_file_buffer.read())
-    video_path = tfile.name
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as tfile:
+        tfile.write(video_file_buffer.read())
+        video_path = tfile.name
     
     cap = cv2.VideoCapture(video_path)
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     fps = cap.get(cv2.CAP_PROP_FPS)
     duration = total_frames / fps
+    cap.release()
 
     # Play the video
     st.video(video_path)
@@ -25,15 +39,7 @@ if video_file_buffer is not None:
     # Slider for marking start and end points
     start_time, end_time = st.slider("Mark the start and end points:", 0.0, duration, (0.0, duration), step=1/fps, format="%.2f s")
 
-
-#displaying selected frames
-def get_frame_at_time(video_path, time_in_seconds):
-    clip = VideoFileClip(video_path)
-    frame = clip.get_frame(time_in_seconds)
-    clip.close()
-    return frame
-
-if video_file_buffer is not None:
+    # Displaying selected frames
     col1, col2 = st.columns(2)
     with col1:
         st.write("Start Frame")
@@ -45,23 +51,16 @@ if video_file_buffer is not None:
         end_frame_img = get_frame_at_time(video_path, end_time)
         st.image(end_frame_img, use_column_width=True)
 
-  #extracting segment
-def extract_video_segment(video_path, start_time, end_time, output_path):
-    clip = VideoFileClip(video_path).subclip(start_time, end_time)
-    clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
-    clip.close()
-
-if video_file_buffer is not None and st.button("Extract Segment"):
-    output_path = tempfile.mktemp(suffix=".mp4")
-    extract_video_segment(video_path, start_time, end_time, output_path)
-    
-    with open(output_path, "rb") as file:
-        btn = st.download_button(
-                label="Download Video Segment",
-                data=file,
-                file_name="extracted_segment.mp4",
-                mime="video/mp4"
-            )
-    os.remove(output_path)  # Clean up the temporary file
-
-
+    # Extracting segment and providing download button
+    if st.button("Extract Segment"):
+        output_path = tempfile.mktemp(suffix=".mp4")
+        extract_video_segment(video_path, start_time, end_time, output_path)
+        
+        with open(output_path, "rb") as file:
+            st.download_button(
+                    label="Download Video Segment",
+                    data=file,
+                    file_name="extracted_segment.mp4",
+                    mime="video/mp4"
+                )
+        os.remove(output_path)  # Clean up the temporary file
