@@ -32,8 +32,8 @@ options = st.selectbox(
     placeholder="Select imaging method...",
 )
 
-    # Slider for marking start and end points
-    start_time, end_time = st.slider("Mark the start and end points:", 0.0, duration, (0.0, duration), step=1/fps, format="%.2f s")
+# Slider for marking start and end points
+start_time, end_time = st.slider("Mark the start and end points:", 0.0, duration, (0.0, duration), step=1/fps, format="%.2f s")
     
 def get_frame_at_time(video_path, time_in_seconds):
     clip = VideoFileClip(video_path)
