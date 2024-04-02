@@ -45,7 +45,7 @@ if video_file_buffer is not None:
         st.image(end_frame_img, use_column_width=True)
 
   #extracting segment
-  def extract_video_segment(video_path, start_time, end_time, output_path):
+def extract_video_segment(video_path, start_time, end_time, output_path):
     clip = VideoFileClip(video_path).subclip(start_time, end_time)
     clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
     clip.close()
