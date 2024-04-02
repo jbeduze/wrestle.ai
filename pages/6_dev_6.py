@@ -37,12 +37,12 @@ if video_file_buffer is not None:
     col1, col2 = st.columns(2)
     with col1:
         st.write("Start Frame")
-        start_frame_img = get_frame_at_time_1(video_path, start_time)
+        start_frame_img = get_frame_at_time(video_path, start_time)
         st.image(start_frame_img, use_column_width=True)
 
     with col2:
         st.write("End Frame")
-        end_frame_img = get_frame_at_time_2(video_path, end_time)
+        end_frame_img = get_frame_at_time(video_path, end_time)
         st.image(end_frame_img, use_column_width=True)
 
   #extracting segment
