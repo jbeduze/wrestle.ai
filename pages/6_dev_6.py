@@ -6,6 +6,7 @@ from moviepy.editor import VideoFileClip
 import os
 
 st.title('Video Segment Extractor')
+st.write("upload video, see start frame and end frame based on the positions on the slider, then be able to download the slider selected video segment")
 
 video_file_buffer = st.file_uploader("Upload a Video", type=["mp4", "mov", "avi", "mkv"])
 if video_file_buffer is not None:
@@ -36,12 +37,12 @@ if video_file_buffer is not None:
     col1, col2 = st.columns(2)
     with col1:
         st.write("Start Frame")
-        start_frame_img = get_frame_at_time(video_path, start_time)
+        start_frame_img = get_frame_at_time_1(video_path, start_time)
         st.image(start_frame_img, use_column_width=True)
 
     with col2:
         st.write("End Frame")
-        end_frame_img = get_frame_at_time(video_path, end_time)
+        end_frame_img = get_frame_at_time_2(video_path, end_time)
         st.image(end_frame_img, use_column_width=True)
 
   #extracting segment
@@ -72,7 +73,7 @@ if video_file_buffer is not None and st.button("Extract Segment"):
     extract_video_segment(video_path, start_time, end_time, output_path)
     
     with open(output_path, "rb") as file:
-        btn = st.download_button(
+        btn = st.download_button_final(
                 label="Download Video Segment",
                 data=file,
                 file_name="extracted_segment.mp4",
