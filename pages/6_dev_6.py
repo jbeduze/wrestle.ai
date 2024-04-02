@@ -7,6 +7,10 @@ import os
 
 st.title('Video Segment Extractor')
 
+#extract videos or single images for ai analysis
+
+
+
 video_file_buffer = st.file_uploader("Upload a Video", type=["mp4", "mov", "avi", "mkv"])
 if video_file_buffer is not None:
     tfile = tempfile.NamedTemporaryFile(delete=False, suffix='.mp4')
@@ -22,7 +26,7 @@ if video_file_buffer is not None:
     st.video(video_path)
 
     # Slider for marking start and end points
-    start_time, end_time = st.slider("Mark the start and end points:", 0.0, duration, (0.0, duration), step=1/fps, format="%.2f s")
+    start_time, end_time = st.slider("Mark the start and end points:", 0.0, duration, (0.0, duration), step=3/fps, format="%.2f s")
     
 def get_frame_at_time(video_path, time_in_seconds):
     clip = VideoFileClip(video_path)
