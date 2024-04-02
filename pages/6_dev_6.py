@@ -62,7 +62,7 @@ if video_file_buffer is not None and st.button("Extract Segment"):
                 mime="video/mp4"
             )
     os.remove(output_path)  # Clean up the temporary file
-Complete Workflow:def extract_video_segment(video_path, start_time, end_time, output_path):
+def extract_video_segment(video_path, start_time, end_time, output_path):
     clip = VideoFileClip(video_path).subclip(start_time, end_time)
     clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
     clip.close()
@@ -79,4 +79,4 @@ if video_file_buffer is not None and st.button("Extract Segment"):
                 mime="video/mp4"
             )
     os.remove(output_path)  # Clean up the temporary file
-Complete Workflow:
+
