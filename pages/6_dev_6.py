@@ -39,8 +39,10 @@ def extract_video_segment(video_path, start_time, end_time, output_path):
     with VideoFileClip(video_path) as clip:
         segment = clip.subclip(start_time, end_time)
         segment.write_videofile(output_path, codec="libx264", audio_codec="aac")
-
-webrtc_streamer(key="live")
+if st.session_state.import_or_live = 0:
+    webrtc_streamer(key="live")
+if st.session_state.import_or_live = 1:
+    st.write("LMFAO")
 
 video_file_buffer = st.file_uploader("Upload a Video", type=["mp4", "mov", "avi", "mkv"])
 if video_file_buffer is not None:
