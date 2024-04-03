@@ -4,6 +4,8 @@ import tempfile
 from moviepy.editor import VideoFileClip
 import numpy as np
 import os
+from streamlit_webrtc import webrtc_streamer
+import av
 
 st.title('Video Segment Extractor')
 
@@ -20,6 +22,8 @@ def extract_video_segment(video_path, start_time, end_time, output_path):
     with VideoFileClip(video_path) as clip:
         segment = clip.subclip(start_time, end_time)
         segment.write_videofile(output_path, codec="libx264", audio_codec="aac")
+
+webrtc_streamer(key="live")
 
 video_file_buffer = st.file_uploader("Upload a Video", type=["mp4", "mov", "avi", "mkv"])
 if video_file_buffer is not None:
