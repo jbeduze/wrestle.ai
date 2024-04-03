@@ -17,7 +17,7 @@ with st.sidebar:
     
     st.session_state.import_or_live = st.radio(
     "import, live, or both",
-    ["Import already existing video", "Record Live Video", "Have both options available"],
+    ["Import already existing video", "Record Live Video"],
     index=0,
 )
 
@@ -25,6 +25,7 @@ st.write(f"You selected:{st.session_state.import_or_live}")
 
 
 st.title('Video Segment Extractor')
+st.write("this app allows you to either select an already recorded video or take a live video for displaying and review, selecting frames and a total segment, to then finally export for analysis")
 
 # Function to safely get a frame at a specific time
 def get_frame_at_time(video_path, time_in_seconds, duration):
