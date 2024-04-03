@@ -8,7 +8,8 @@ from streamlit_webrtc import webrtc_streamer
 import av
 
 #sidebar elements
-st.sidebar("---")
+with st.sidebar:
+    ("---")
 
 
 st.title('Video Segment Extractor')
