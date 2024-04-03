@@ -21,7 +21,7 @@ with st.sidebar:
     index=0,
 )
 
-st.write("You selected:{st.session_state.import_or_live}")
+st.write(f"You selected:{st.session_state.import_or_live}")
 
 
 st.title('Video Segment Extractor')
