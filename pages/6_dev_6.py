@@ -10,13 +10,12 @@ import av
 #sidebar elements
 with st.sidebar:
     ("---")
-    st.write("Select if you are importing an existing video or if you'd like to reocrd live video")
 
     if 'import_or_live' not in st.session_state:
         st.session_state.import_or_live = "import already existing video"
     
     st.session_state.import_or_live = st.radio(
-    "import or live",
+    "Select if you are importing an existing video or if you'd like to reocrd live video",
     ["Import already existing video", "Record Live Video"],
     index=0,
 )
