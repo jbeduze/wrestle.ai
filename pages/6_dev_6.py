@@ -31,7 +31,6 @@ if video_file_buffer is not None:
         index=None,
         placeholder="Select imaging method...",
     )
-    if 
         # Slider for marking start and end points
         start_time, end_time = st.slider("Mark the start and end points:", 0.0, duration, (0.0, duration), step=1/fps, format="%.2f s")
         
