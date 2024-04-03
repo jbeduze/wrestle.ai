@@ -16,7 +16,7 @@ with st.sidebar:
         st.session_state.import_or_live = "import already existing video"
     
     st.session_state.import_or_live = st.radio(
-    "import, live, or both",
+    "import or live",
     ["Import already existing video", "Record Live Video"],
     index=0,
 )
