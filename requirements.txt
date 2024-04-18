@@ -13,3 +13,8 @@ tensorflow
 streamlit-webrtc
 
 moviepy
+
+langchain
+PyPDF2
+faiss
+streamlit-extras
